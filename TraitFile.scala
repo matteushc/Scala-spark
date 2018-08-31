@@ -69,8 +69,7 @@ object TraitFile {
     if(checkValueIsNullOrEmpty(data) ){
       "--"
     }else{
-      val d = data.replace(".", "").replace("e+12", "")
-      val ts: BigInt = d.toLong
+      val ts: BigInt = data.toLong
       val df: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
       df.setTimeZone(new SimpleTimeZone(SimpleTimeZone.UTC_TIME, "UTC"))
       df.format(ts.toLong)
@@ -81,8 +80,7 @@ object TraitFile {
     if(checkValueIsNullOrEmpty(data) ){
       "--"
     }else{
-      val d = data.replace(".", "").replace("e+12", "")
-      val ts: BigInt = d.toLong
+      val ts: BigInt = data.toLong
       val df: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
       df.setTimeZone(new SimpleTimeZone(SimpleTimeZone.UTC_TIME, "UTC"))
       df.format(ts.toLong)
