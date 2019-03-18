@@ -29,22 +29,12 @@ object VectorArray {
 
     }).toDF("id", "features")
 
-    /*
-    val df = Seq(
-      (1L, Vectors.sparse(4, Array(0, 2, 3), Array(1, 1, 1))),
-      (2L, Vectors.sparse(4, Array(1, 2), Array(1, 1))),
-      (3L, Vectors.sparse(4, Array(3), Array(1))),
-      (4L, Vectors.sparse(4, Array(0, 3), Array(1, 1))),
-      (5L, Vectors.sparse(4, Array(1, 2, 3), Array(1, 1, 1)))
-    ).toDF("id", "features")
-    */
 
     val indices = udf((v: SparseVector) => v.indices)
 
     val possibleMatches = df
       //.withColumn("key", explode(indices($"features")))
-    //possibleMatches.show()
-      //.transform(df => df.alias("left").crossJoin()join(df.alias("right"), Seq("key")))
+      //.transform(df => df.alias("left").join(df.alias("right"), Seq("key")))
       .transform(df => df.alias("left").crossJoin(df.alias("right")))
 
     val closeEnough = udf((v1: SparseVector, v2: SparseVector) =>  jaccardSimilarity(v1, v2))
